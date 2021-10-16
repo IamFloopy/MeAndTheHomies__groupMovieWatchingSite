@@ -1,0 +1,24 @@
+.main__chat__window {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 20px 20px 0 20px;
+}
+.main__message_container {
+  padding: 22px 11px;
+  display: flex;
+}
+.main__message_container input {
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  color: #69c51e;
+  user-select: none;
+  outline: none;
+}
+
+#all_messages li {
+  color: rgb(37, 67, 202);
+  list-style: none;
+  border-bottom: 1px solid #3d3d42;
+  padding: 10px 0;
+}

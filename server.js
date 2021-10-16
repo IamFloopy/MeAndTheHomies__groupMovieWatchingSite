@@ -8,7 +8,8 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.redirect(`/${uuidV4()}`)
+  //res.redirect(`/${uuidV4()}`)
+  res.redirect(`meandthehomies`)
 })
 
 app.get('/:room', (req, res) => {
@@ -20,8 +21,13 @@ io.on('connection', socket => {
     socket.join(roomId)
     socket.to(roomId).broadcast.emit('user-connected', userId)
 
+    socket.on("message", (message) => {
+      io.to(roomId).emit("createMessage", message);
+    });
+
     socket.on('disconnect', () => {
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
+
     })
   })
 })
