@@ -31,12 +31,14 @@ io.on('connection', socket => {
     socket.on("nickname", (nickname) => {
       all_users.push(nickname.user)
       userId_list.push(userId)
+      all_users = [...new Set(all_users)];
 
       io.to(roomId).emit("shownickname", nickname, all_users);
     });
 
     //receive data from script.js
     socket.on("message", (message) => {
+      
       io.to(roomId).emit("createMessage", message);
     });
 
@@ -46,7 +48,7 @@ io.on('connection', socket => {
       //console.log(indOf)
       all_users.splice(indOf, 1)
       userId_list.splice(indOf, 1)
-      //console.log(all_users)
+      console.log(all_users)
 
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
 
