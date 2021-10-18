@@ -31,25 +31,29 @@ io.on('connection', socket => {
     socket.on("nickname", (nickname) => {
       all_users.push(nickname.user)
       userId_list.push(userId)
+      userId_list = [...new Set(userId_list)];
       all_users = [...new Set(all_users)];
-
       io.to(roomId).emit("shownickname", nickname, all_users);
     });
 
     //receive data from script.js
     socket.on("message", (message) => {
-      
       io.to(roomId).emit("createMessage", message);
     });
 
+    socket.on("emoji", (emoji) => { 
+      let user_index = all_users.indexOf(emoji.user)
+      io.to(roomId).emit("displayEmoji", emoji, user_index);
+    });
+
     socket.on('disconnect', () => {
-      
       var indOf = userId_list.indexOf(userId)
       //console.log(indOf)
       all_users.splice(indOf, 1)
       userId_list.splice(indOf, 1)
-      console.log(all_users)
-
+      /*console.log(all_users)
+      console.log(userId_list)*/
+      
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
 
     })

@@ -145,11 +145,16 @@ function addVideoStream(video, stream) {
 
     for (var i = 1; i <= index_id; ++i) {
         let idOf = document.getElementById('' + i)
-        idOf.innerHTML = `<div class="face_name">
+        //removes the "ghosts" (accumulated undefined users due to someone leaving, but the div staying)
+        /*if (all_users[i-1] == undefined) {
+          idOf.parentNode.removeChild(idOf)
+        } else {*/
+        idOf.innerHTML = `<div class="face_name id="face_name">
                             <img src="https://avatars.dicebear.com/api/big-smile/${all_users[i-1]}.svg">
-                            <div class="jmeno">${all_users[i-1]}</div>
-                          </div>`
-        console.log(idOf)
+                            <div class="jmeno id="jmeno">${all_users[i-1]}</div>
+                          </div>
+                          `  
+        //}
 }
   
 
@@ -188,3 +193,73 @@ function startScreenShare() {
       setRemoteStream(stream)
   })
 }
+
+//send emoji that was pressed to server.js
+function sendEmoji(emoji) {
+  socket.emit("emoji", {
+    emoji: emoji,
+    user: nickname.value
+  });
+  //console.log(emoji)
+}
+
+//receive an emoji from server.js to display
+socket.on("displayEmoji", (emoji, user_index) => {
+  user_index += 1;
+  var picLink;
+  function whatPicture() {
+    switch (emoji.emoji) {
+      case 'monkas':
+        picLink = "https://www.streamscheme.com/wp-content/uploads/2020/04/Monkas.png.webp";
+        break;
+      case 'pepelaugh':
+        picLink = "https://www.streamscheme.com/wp-content/uploads/2020/08/pepelaugh-emote.png";
+        break;
+      case 'monkahmm':
+        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/09/monkahmm-emote.png" ;
+        break;
+      case 'poggers':
+        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/04/poggers.png.webp";
+        break;
+      case 'feelsbadman':
+        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/04/feelsbadman.png.webp" ;
+        break;
+      case 'pepehands':
+        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/04/pepehands.png.webp" ;
+        break;
+      case 'comfy':
+        picLink ="https://i.ibb.co/2hsHSD9/comfy.png" ;
+        break;
+      case 'cutescared':
+        picLink ="https://i.ibb.co/Sv8V0PP/cutescared.png";
+        break;
+      case 'popcorn':
+        picLink ="https://i.ibb.co/XCm9nnM/popcorn.png";
+        break;
+      case 'lovestruck':
+        picLink ="https://i.ibb.co/PQWVMcC/lovestruck.png" ;
+        break;
+      case 'scared':
+        picLink ="https://i.ibb.co/HB3bGMV/scared.png";
+        break;
+      case 'angry':
+        picLink ="https://i.ibb.co/Fh64PVZ/angry.png" ;
+        break;
+      case 'vomit':
+        picLink ="https://i.ibb.co/jgr3PnB/vomit.png";
+        break;
+      case 'heart':
+        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/04/twitch-heart.png.webp";
+    } //console.log(picLink)
+  }
+  whatPicture()
+  for (var i = 1; i <= index_id; ++i) {
+    if (i == user_index) {
+    let idOf = document.getElementById('' + i)
+    idOf.removeChild(idOf.childNodes[1]);
+    idOf.innerHTML += `<div class="displayedEmote">
+                        <img src="${picLink}">
+                        </div>`  
+    }
+  }
+});
