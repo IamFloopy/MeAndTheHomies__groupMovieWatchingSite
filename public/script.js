@@ -8,6 +8,7 @@ const activeGrid = document.getElementById('active-grid')
 
 
 const myPeer = new Peer(undefined, {
+  path: '/peerjs',
   host: '/',
   port: '443'
 })
