@@ -7,9 +7,9 @@ const nickname = document.getElementById("nickname");
 const activeGrid = document.getElementById('active-grid')
 
 
-const myPeer = new Peer("someid", {
+const myPeer = new Peer(undefined, {
   secure: true,
-  host: 'homies-peerjs.herokuapp.com/meandthehomies',
+  host: 'homies-peerjs.herokuapp.com',
   port: 443,
 })
 const myVideo = document.createElement('video')
