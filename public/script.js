@@ -8,7 +8,6 @@ const activeGrid = document.getElementById('active-grid')
 
 
 const myPeer = new Peer(undefined, {
-  secure: true,
   host: '/',
   port: 443,
 })
