@@ -10,6 +10,7 @@ const activeGrid = document.getElementById('active-grid')
 const myPeer = new Peer("someid", {
   secure: true,
   host: 'homies-peerjs.herokuapp.com',
+  port: 443,
 })
 const myVideo = document.createElement('video')
 myVideo.muted = true
