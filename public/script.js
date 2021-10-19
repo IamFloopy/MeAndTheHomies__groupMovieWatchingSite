@@ -14,10 +14,13 @@ const myPeer = new Peer(undefined, {
 const myVideo = document.createElement('video')
 myVideo.muted = true
 const peers = {}
+
+let myVideoStream
 navigator.mediaDevices.getUserMedia({
   video: false,
   audio: true
 }).then(stream => {
+  myVideoStream = stream;
   addVideoStream(myVideo, stream)
 
   function displayHide() {
@@ -306,3 +309,22 @@ socket.on("displayVid", (link) => {
                       allow="autoplay;" frameborder="0" autoplay>
                       </iframe>`  
 })
+
+//mute unmute
+const muteUnmute = () => {
+  const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getAudioTracks()[0].enabled = false;
+    setUnmuteButton();
+  } else {
+    setMuteButton();
+    myVideoStream.getAudioTracks()[0].enabled = true;
+  }
+}
+let mute_el = document.getElementById("button3");
+const setMuteButton = () => {
+  mute_el.innerHTML = `<i class="fas fa-microphone"></i>`
+}
+const setUnmuteButton = () => {
+  mute_el.innerHTML = `<i class="unmute fas fa-microphone-slash "></i>`
+}
