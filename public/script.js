@@ -7,10 +7,9 @@ const nickname = document.getElementById("nickname");
 const activeGrid = document.getElementById('active-grid')
 
 
-const myPeer = new Peer(undefined, {
+const myPeer = new Peer("someid", {
   secure: true,
   host: 'me-and-the-homies.herokuapp.com',
-  port: '443'
 })
 const myVideo = document.createElement('video')
 myVideo.muted = true
