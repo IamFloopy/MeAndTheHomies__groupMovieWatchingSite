@@ -31,8 +31,8 @@ io.on('connection', socket => {
     socket.on("nickname", (nickname) => {
       all_users.push(nickname.user)
       userId_list.push(userId)
-      userId_list = [...new Set(userId_list)];
-      all_users = [...new Set(all_users)];
+      /*userId_list = [...new Set(userId_list)];
+      all_users = [...new Set(all_users)];*/
       io.to(roomId).emit("shownickname", nickname, all_users);
     });
 
@@ -44,6 +44,10 @@ io.on('connection', socket => {
     socket.on("emoji", (emoji) => { 
       let user_index = all_users.indexOf(emoji.user)
       io.to(roomId).emit("displayEmoji", emoji, user_index);
+    });
+
+    socket.on("link", (link) => { 
+      io.to(roomId).emit("displayVid", link);
     });
 
     socket.on('disconnect', () => {

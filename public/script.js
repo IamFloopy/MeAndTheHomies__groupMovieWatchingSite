@@ -53,7 +53,8 @@ socket.on('user-disconnected', userId=> {
 
 
 //get_user_input_name
-document.addEventListener("keydown", (e) => {
+var id_nick = document.getElementById("nickname")
+id_nick.addEventListener("keydown", (e) => {
   if (e.which === 13 && nickname.value != "") {
     socket.emit("nickname", {
       user: nickname.value,
@@ -175,7 +176,10 @@ function setLocalStream(stream) {
   video.play();
 }
 function setRemoteStream(stream) {
-
+  let screen = document.getElementById("screen-share");
+  screen.innerHTML = `<div class="meet-area">
+                    <video id="remote-video"></video>
+                    </div>`
   let video = document.getElementById("remote-video");
   video.srcObject = stream;
   video.play();
@@ -263,3 +267,42 @@ socket.on("displayEmoji", (emoji, user_index) => {
     }
   }
 });
+
+//hideshow link box
+function hideLink() {
+  document.getElementById("linkInputBox").style.visibility = "hidden";
+}
+function showLink() {
+  document.getElementById("linkInputBox").style.visibility = "visible";
+}
+hideLink()
+function myFunction() {
+  var x = document.getElementById("linkInputBox");
+  if (x.style.visibility === "hidden") {
+    showLink()
+  } else {
+    hideLink()
+  }
+}
+
+var link_send = document.getElementById("link")
+link_send.addEventListener("keydown", (e) => {
+  if (e.which === 13 && link_send.value != "") {
+    equal_symbol = link_send.value.indexOf("=")
+    and_symbol = link_send.value.indexOf("&")
+    embed_link = link_send.value.substring(equal_symbol +1, and_symbol);
+    console.log(embed_link)
+    socket.emit("link", {
+    link: embed_link
+  });
+    link_send.value = "";
+    hideLink()
+  }
+});
+
+socket.on("displayVid", (link) => {
+  var YTVid = document.getElementById("iframe");
+  YTVid.innerHTML = `<iframe class="embedded_vid" src="https://www.youtube.com/embed/${link.link}?autoplay=1" 
+                      allow="autoplay;" frameborder="0" autoplay>
+                      </iframe>`  
+})

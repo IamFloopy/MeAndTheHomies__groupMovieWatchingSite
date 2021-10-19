@@ -1,6 +1,10 @@
 .main__right {
+    position: absolute;
+    right: 0;
     margin-left: 9px;
     width: 314px;
+    background-color:#22232e;
+    padding-left: 7px;
 }
 .main__chat__window {
   flex-grow: 1;
@@ -46,7 +50,7 @@ h6 {
     margin-top: 18px;
     display: flex;
     justify-content: center;
-    color: rgb(195, 197, 206);
+    color: #bff8f8 
 }
 
 hr {
@@ -96,6 +100,7 @@ input {
 }
 
 .meet-area {
+    position: absolute;
     width: 1536px;
     height: 864px;
 }
@@ -138,7 +143,10 @@ b {
     background: rgb(104, 105, 112); 
 
   }
-
+.buttons {
+    display:flex;
+    flex-direction: column;
+}
 .button2 {
     background-color: #008CBA;
   border: none;
@@ -148,8 +156,8 @@ b {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-  padding: 12px 14px;
-  margin-top:10px ;
+  padding: 9px 11px;
+  margin-top:9px ;
 }
 .bottom_line_left {
     display:flex;
@@ -230,4 +238,41 @@ b {
         opacity:0;
         transform: translateY(-45px)
     }
+}
+
+.embedded_vid {
+    position: absolute;
+    margin-left: -6px;
+    width: 1536px;
+    height: 864px;
+}
+
+.under-layer {
+    width: 314px;
+    height: 864px;
+}
+#link {
+    position: absolute;
+    left:.45%;
+    top: 84.4%;
+    background: rgba(57, 63, 84, 0.8); 
+    color: #BFD2FF;
+    font-size: 20px;
+    padding: 12px 16px;
+    width:510px;
+}
+.rainbow_link {
+    position: absolute;
+    left:.45%;
+    top: 88.9%;
+    height: 3px;
+    background: linear-gradient(to right, #B294FF, #57E6E6, #57E6E6, #B294FF, #57E6E6);
+    width: 542px;
+}
+.yt_area {
+    position: absolute;
+    margin-left: -6px;
+    width: 1536px;
+    height: 864px;
+    background-color: #1d1e26;
 }
