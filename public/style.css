@@ -302,3 +302,6 @@ b {
     position: absolute;
     right: 0%;
 }
+.cursor {
+    cursor: url("https://ibb.co/bgnKd7y"), 32 32, pointer;;
+}
