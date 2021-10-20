@@ -2,7 +2,7 @@
     position: absolute;
     right: 0;
     margin-left: 9px;
-    width: 314px;
+    width: 340px;
     background-color:#22232e;
     padding-left: 7px;
 }
@@ -14,8 +14,8 @@
 }
 
 .main__message_container {
-    width: 255px;
-    margin: -1.5px 0px 0px 0px;
+    width: 268px;
+    margin: -1.5px 10px 0px 0px;
     height: 8px;
     border-radius: 2px;
     padding: 1.5rem 2rem 1.6rem;
@@ -34,7 +34,7 @@
   color: rgb(226, 231, 255);
   list-style: none;
   padding: 10px 0;
-  width: 250px;
+  width: 294px;
 }
 
 
@@ -217,13 +217,13 @@ b {
 }
 .displayedEmote{
     position: relative;
-    top:-70%;
+    top:-73%;
     left: 40%;
 }
 .displayedEmote img{
     border-radius: 30px 30px 30px 10px;
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
     animation: fadeOut 1s;
     opacity:0;
 }
@@ -302,6 +302,7 @@ b {
     position: absolute;
     right: 0%;
 }
-.cursor {
-    cursor: url("https://ibb.co/bgnKd7y"), 32 32, pointer;;
+
+/*body {
+    cursor: url("https://i.ibb.co/wWKSppw/banana-removebg-preview.png"),auto;
 }

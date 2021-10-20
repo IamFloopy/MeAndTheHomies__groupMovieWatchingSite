@@ -52,7 +52,10 @@ socket.on('user-disconnected', userId=> {
   var el = document.getElementById( id_nickname );
   console.log(el)*/
 
+
   if (peers[userId]) peers[userId].close()
+  activeGrid.removeChild(activeGrid.lastElementChild);
+  
 
 })
 
@@ -90,7 +93,7 @@ document.addEventListener("keydown", (e) => {
 
 //receive data from server.js and display it
 socket.on("createMessage", (message) => {
-  console.log(message);
+  //console.log(message);
   let li = document.createElement("li");
   if (message.user != nickname.value) {
     li.classList.add("otherUser");
@@ -165,7 +168,7 @@ function addVideoStream(video, stream) {
   
 
 })
-  activeGrid.innerHTML = activeGrid.innerHTML + `<div id="${index_id}">${nameOf}</div>`;
+  activeGrid.innerHTML = activeGrid.innerHTML + `<div id="${activeGrid.children.length + 1}">${nameOf}</div>`;
   index_id += 1;
 }
 
@@ -259,6 +262,12 @@ socket.on("displayEmoji", (emoji, user_index) => {
         break;
       case 'heart':
         picLink ="https://www.streamscheme.com/wp-content/uploads/2020/04/twitch-heart.png.webp";
+        break;
+      case 'namca1':
+        picLink ="https://i.ibb.co/RCkk615/namca1.png";
+        break;
+      case 'namca2':
+        picLink ="https://i.ibb.co/xSGJpDM/namca2.png";
     } //console.log(picLink)
   }
   whatPicture()
