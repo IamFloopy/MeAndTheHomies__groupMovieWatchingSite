@@ -53,7 +53,7 @@ socket.on('user-disconnected', userId=> {
 
 
   if (peers[userId]) peers[userId].close()
-  activeGrid.removeChild(activeGrid.lastElementChild);
+  //activeGrid.removeChild(activeGrid.lastElementChild);-------------------------------------------------
   
 
 })
@@ -153,10 +153,6 @@ function addVideoStream(video, stream) {
 
     for (var i = 1; i <= index_id; ++i) {
         let idOf = document.getElementById('' + i)
-        //removes the "ghosts" (accumulated undefined users due to someone leaving, but the div staying)
-        /*if (all_users[i-1] == undefined) {
-          idOf.parentNode.removeChild(idOf)
-        } else {*/
         idOf.innerHTML = `<div class="face_name id="face_name">
                             <img src="https://avatars.dicebear.com/api/big-smile/${all_users[i-1]}.svg">
                             <div class="jmeno id="jmeno">${all_users[i-1]}</div>
@@ -268,7 +264,7 @@ link_send.addEventListener("keydown", (e) => {
     equal_symbol = link_send.value.indexOf("=")
     and_symbol = link_send.value.indexOf("&")
     embed_link = link_send.value.substring(equal_symbol +1, and_symbol);
-    console.log(embed_link)
+    //console.log(embed_link)
     socket.emit("link", {
     link: embed_link
   });
