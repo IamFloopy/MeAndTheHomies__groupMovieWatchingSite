@@ -25,6 +25,8 @@ app.get('/:room', (req, res) => {
 //userId_list includes userIds position corelates to position of names in all_users
 let all_users = [];
 let userId_list = [];
+let time;
+let currentLink;
 
 io.on('connection', socket => {
   socket.on('join-room', (roomId, userId) => {
@@ -52,7 +54,17 @@ io.on('connection', socket => {
     });
 
     socket.on("link", (link) => { 
+      currentLink = link;
+      time = Date.now();
       io.to(roomId).emit("displayVid", link);
+    });
+
+    socket.on("syncVid", () => { 
+      io.to(roomId).emit("sync", time, currentLink);
+    });
+    
+    socket.on("addEmoji", (addEmoji) => { 
+      io.to(roomId).emit("createEmoji", addEmoji);
     });
 
     socket.on('disconnect', () => {

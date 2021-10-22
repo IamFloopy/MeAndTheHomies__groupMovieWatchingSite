@@ -184,7 +184,7 @@ b {
 .emojis {
     margin-top: 5px;
     width: 480px;
-    height: 92px;
+    height: 172px;
     overflow: auto;
     background-color: #20222e;
 }
@@ -305,4 +305,70 @@ b {
 
 /*body {
     cursor: url("https://i.ibb.co/wWKSppw/banana-removebg-preview.png"),auto;
+}*/
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonAddEmoji {
+    background-color: #c644ca;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 23px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 9px 11px;
+    margin-top:9px ;
+    height: 35px;
+
+}
+
+.buttonAddEmoji p {
+    margin-top: -7px;
+}
+.buttonAddEmoji:active {
+    transform: translateY(2px);
+ }
+
+ .sync {
+    background-color: #64cf76;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 9px 11px;
+    margin-top:9px ;
+    height: 35px;
+ }
+ .sync p {
+    margin-top:-0px ;
+ }
+ .sync:active {
+    transform: translateY(2px);
+ }
+ .emoteInput {
+     display:flex;
+     justify-content: center;
+     padding: 10px;
+     background-color: #6783dd;
+     border-radius: 25px;
+     margin: 9px 100px 12px 100px;
+     font-size: 14px;
+ }
+ #addEmoteInput {
+     width: 350px;
+    text-align: center;
+    color: white;
+ }
+ #addEmoteInput::placeholder {
+   color: white;
 }

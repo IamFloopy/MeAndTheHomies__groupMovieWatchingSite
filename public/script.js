@@ -8,7 +8,6 @@ const activeGrid = document.getElementById('active-grid')
 
 
 const myPeer = new Peer(undefined, {
- // path: '/peerjs',
   host: 'homies-peerjs-server.herokuapp.com',
   port: '443',
   secure: true
@@ -218,68 +217,32 @@ function sendEmoji(emoji) {
 //receive an emoji from server.js to display
 socket.on("displayEmoji", (emoji, user_index) => {
   user_index += 1;
-  var picLink;
-  function whatPicture() {
-    switch (emoji.emoji) {
-      case 'monkas':
-        picLink = "https://www.streamscheme.com/wp-content/uploads/2020/04/Monkas.png.webp";
-        break;
-      case 'pepelaugh':
-        picLink = "https://www.streamscheme.com/wp-content/uploads/2020/08/pepelaugh-emote.png";
-        break;
-      case 'monkahmm':
-        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/09/monkahmm-emote.png" ;
-        break;
-      case 'poggers':
-        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/04/poggers.png.webp";
-        break;
-      case 'feelsbadman':
-        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/04/feelsbadman.png.webp" ;
-        break;
-      case 'pepehands':
-        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/04/pepehands.png.webp" ;
-        break;
-      case 'comfy':
-        picLink ="https://i.ibb.co/2hsHSD9/comfy.png" ;
-        break;
-      case 'cutescared':
-        picLink ="https://i.ibb.co/Sv8V0PP/cutescared.png";
-        break;
-      case 'popcorn':
-        picLink ="https://i.ibb.co/XCm9nnM/popcorn.png";
-        break;
-      case 'lovestruck':
-        picLink ="https://i.ibb.co/PQWVMcC/lovestruck.png" ;
-        break;
-      case 'scared':
-        picLink ="https://i.ibb.co/HB3bGMV/scared.png";
-        break;
-      case 'angry':
-        picLink ="https://i.ibb.co/Fh64PVZ/angry.png" ;
-        break;
-      case 'vomit':
-        picLink ="https://i.ibb.co/jgr3PnB/vomit.png";
-        break;
-      case 'heart':
-        picLink ="https://www.streamscheme.com/wp-content/uploads/2020/04/twitch-heart.png.webp";
-        break;
-      case 'namca1':
-        picLink ="https://i.ibb.co/RCkk615/namca1.png";
-        break;
-      case 'namca2':
-        picLink ="https://i.ibb.co/xSGJpDM/namca2.png";
-    } //console.log(picLink)
-  }
-  whatPicture()
+  //console.log(emoji.emoji)
   for (var i = 1; i <= index_id; ++i) {
     if (i == user_index) {
     let idOf = document.getElementById('' + i)
     idOf.removeChild(idOf.childNodes[1]);
     idOf.innerHTML += `<div class="displayedEmote">
-                        <img src="${picLink}">
+                        <img src="${emoji.emoji}">
                         </div>`  
     }
   }
+});
+
+let addEmojis = document.getElementById('addEmoteInput')
+addEmojis.addEventListener("keydown", (e) => {
+  if (e.which === 13 && addEmojis.value != "") {
+    socket.emit("addEmoji", {
+      addEmoji: addEmojis.value,
+    });
+    addEmojis.value = "";
+  }
+});
+
+socket.on("createEmoji", (addEmoji) => {
+    let Emo = document.getElementById('inEmojis')
+    console.log(Emo)
+    Emo.innerHTML += `<button onclick="sendEmoji('${addEmoji.addEmoji}')"><img src="${addEmoji.addEmoji}" /></button>`  
 });
 
 //hideshow link box
@@ -338,4 +301,34 @@ const setMuteButton = () => {
 }
 const setUnmuteButton = () => {
   mute_el.innerHTML = `<i class="unmute fas fa-microphone-slash "></i>`
+}
+
+function syncVid() {
+  socket.emit("syncVid", {
+  });
+}
+
+let timeScript;
+let currentLinkScript;
+
+socket.on("sync", (time, currentLink) => {
+  timeScript = time;
+  currentLinkScript = currentLink.link
+})
+
+function syncVid2() {
+  var YTVid = document.getElementById("iframe");
+  timeNow = Date.now();
+  let seconds = Math.round((timeNow - timeScript)/1000);
+  console.log(currentLinkScript)
+  console.log(seconds)
+  YTVid.innerHTML = `<iframe class="embedded_vid" src="https://www.youtube.com/embed/${currentLinkScript}?autoplay=1&start=${seconds}" 
+                      allow="autoplay;" frameborder="0" autoplay>
+                      </iframe>`  
+}
+
+function wait() {
+  setTimeout(function(){
+    syncVid2();
+},50);
 }
