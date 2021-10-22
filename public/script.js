@@ -319,7 +319,7 @@ socket.on("sync", (time, currentLink) => {
 function syncVid2() {
   var YTVid = document.getElementById("iframe");
   timeNow = Date.now();
-  let seconds = Math.round((timeNow - timeScript)/1000) -1;
+  let seconds = Math.round((timeNow - timeScript)/1000);
   console.log(currentLinkScript)
   console.log(seconds)
   YTVid.innerHTML = `<iframe class="embedded_vid" src="https://www.youtube.com/embed/${currentLinkScript}?autoplay=1&start=${seconds}" 
