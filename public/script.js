@@ -53,7 +53,7 @@ socket.on('user-disconnected', userId=> {
 
 
   if (peers[userId]) peers[userId].close()
-  //activeGrid.removeChild(activeGrid.lastElementChild);-------------------------------------------------
+  activeGrid.removeChild(activeGrid.lastElementChild);
   
 
 })
